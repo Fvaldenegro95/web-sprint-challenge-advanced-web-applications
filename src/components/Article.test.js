@@ -5,27 +5,51 @@ import userEvent from '@testing-library/user-event';
 import MutationObserver from 'mutationobserver-shim';
 
 import Article from './Article';
-import {render} from '@testing-library/react'
+import {render, screen } from '@testing-library/react'
 
 const testArticle = {
     id: 'aMqwd', //unique article id
     headline: "headline", //title of article
     createdOn: '2021-08-09T18:02:38-04:00',
     summary: "summary", //short summary statement of article
-      body: ""  //paragraph of article text
+    body: "text",
+    author: "author" 
+
 }
+const testArticle2 = {
+    id: 'aMqwd', 
+    headline: "headline", 
+    createdOn: '2021-08-09T18:02:38-04:00', 
+    summary: "summary", 
+    body: "text" 
+    }
 
 test('renders component without errors', ()=> {
     render(<Article article={testArticle}/>)
 });
 
 test('renders headline, author from the article when passed in through props', ()=> {
+    render(<Article article={testArticle}/>)
+
+    const headline = screen.getByText("headline")
+    const author = screen.getByText("By author")
+
+    expect(headline).toBeInTheDocument()
+    expect(author).toBeInTheDocument()
+
 });
 
 test('renders "Associated Press" when no author is given', ()=> {
+    render(<Article article={testArticle2}/>)
+
+
+    const author = screen.getByText("By Associated Press")
+
+    expect(author).toBeInTheDocument()
 });
 
 test('executes handleDelete when the delete button is pressed', ()=> {
+    render(<Article article={testArticle}/>)
 });
 
 //Task List:
