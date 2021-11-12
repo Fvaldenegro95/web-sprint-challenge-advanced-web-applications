@@ -15,16 +15,19 @@ const App = () => {
       <LambdaHeader/>
       <Header/>
       <RouteContainer>
-        <Route exact path="/">
-          <Login/>
-        </Route>          
+
+        <Route exact path="/" component={Login} />
+        <Route path="/login" component={Login} />
+        <PrivateRoute path="/view" component={View} />
+        <PrivateRoute path="/logout" component={Logout} />
+
       </RouteContainer>
+
     </AppContainer>
   )
 }
 
 export default App;
-
 //Task List
 //1. Create and import PrivateRoute component.
 //2. Create a Route for Login pointing to '/login.'
